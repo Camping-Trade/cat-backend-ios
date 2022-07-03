@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.ir.backend.js.compile
 
 plugins {
     id("org.springframework.boot") version "2.7.1"
@@ -32,6 +33,10 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation(kotlin("test"))
+    //db
+    implementation("org.mariadb.jdbc:mariadb-java-client")
+    runtimeOnly ("com.h2database:h2:1.4.197")
 }
 
 tasks.withType<KotlinCompile> {
