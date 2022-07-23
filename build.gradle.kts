@@ -42,6 +42,9 @@ dependencies {
     //db
     implementation("org.mariadb.jdbc:mariadb-java-client")
     runtimeOnly ("com.h2database:h2:1.4.197")
+    //swagger
+    implementation ("io.springfox:springfox-boot-starter:3.0.0")
+
 }
 
 tasks.withType<KotlinCompile> {
