@@ -17,7 +17,7 @@ class SwaggerConfig {
         return Docket(DocumentationType.OAS_30)
             .useDefaultResponseMessages(false)
             .select()
-            .apis(RequestHandlerSelectors.basePackage("com.example.springswagger.controller"))
+            .apis(RequestHandlerSelectors.basePackage("com.example.cat.controller"))
             .paths(PathSelectors.any())
             .build()
             .apiInfo(apiInfo())
