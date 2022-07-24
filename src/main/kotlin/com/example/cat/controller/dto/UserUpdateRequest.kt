@@ -1,6 +1,6 @@
 package com.example.cat.controller.dto
 
-data class UserInfoResponse(
+data class UserUpdateRequest(
     val id: Long,
     val nickname: String,
     val profileImageUrl: String,
