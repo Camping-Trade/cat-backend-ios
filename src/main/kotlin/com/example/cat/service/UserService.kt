@@ -9,8 +9,7 @@ class UserService(
     private val userRepository: UserRepository
 ) {
     fun signUp(user: User): User{
-        userRepository.findByEmail(user.email)
-            ?: throw IllegalAccessException("이미 존재하는 회원입니다")
+        userRepository.findByEmail(user.email)?.let { throw IllegalAccessException("이미 존재하는 회원입니다") }
         return userRepository.save(user)
     }
     fun updateUserInfo(request: User): User{
