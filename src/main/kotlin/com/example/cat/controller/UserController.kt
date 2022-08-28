@@ -4,15 +4,11 @@ import com.example.cat.controller.dto.UserInfoResponse
 import com.example.cat.controller.dto.UserSignUpRequest
 import com.example.cat.controller.dto.UserUpdateRequest
 import com.example.cat.domain.User
-import com.example.cat.repository.UserRepository
 import com.example.cat.service.UserService
 import io.swagger.v3.oas.annotations.Operation
-import io.swagger.v3.oas.annotations.responses.ApiResponse
-import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
-
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -24,8 +20,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/api/user")
 class UserController(
-   private val userRepository: UserRepository,
-   private val userService: UserService,
+    private val userService: UserService,
 
     ) {
 
