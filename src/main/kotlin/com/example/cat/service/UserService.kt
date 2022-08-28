@@ -14,7 +14,7 @@ class UserService(
     }
     fun updateUserInfo(request: User): User{
 
-       var user = request.id?.let { finduserbyId(it) }
+       val user = request.id?.let { finduserbyId(it) }
            ?: throw IllegalStateException("userId가 입력되지 않았습니다")
         user.email = request.email
         user.nickname = request.nickname
@@ -22,7 +22,7 @@ class UserService(
         return userRepository.save(user)
     }
     fun deleteUser(userId: Long){
-        var user = finduserbyId(userId)
+        val user = finduserbyId(userId)
         userRepository.delete(user)
     }
     fun getUserInfo(userId: Long): User{
