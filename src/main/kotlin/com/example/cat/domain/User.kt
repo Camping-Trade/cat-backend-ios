@@ -18,4 +18,8 @@ class User(
     @Enumerated(EnumType.STRING)
     var roleType: RoleType = RoleType.USER,
     var point: Int = 0,
-)
+) {
+    fun updatePoint(point: Int) {
+        this.point += point
+    }
+}

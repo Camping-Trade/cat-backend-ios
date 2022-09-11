@@ -1,6 +1,9 @@
 package com.example.cat.service
 
 import com.example.cat.controller.dto.ShareRecordDto
+import com.example.cat.domain.User
+import com.example.cat.domain.sharing.Post
+import com.example.cat.domain.sharing.PostStatus
 import com.example.cat.domain.sharing.ShareRecord
 import com.example.cat.domain.sharing.ShareType
 import com.example.cat.repository.PostRepository
@@ -15,29 +18,51 @@ class ShareService(
     private val postRepository: PostRepository,
 ) {
     data class Request(
-        val userId: String,
-        val type: ShareType,
+        val shareUserId: String,
+        val receiveUserId: String,
         val postId: String,
-        val campId: Long,
     )
-    fun saveRecord(request: Request): ShareRecordDto {
-        val(userId, type, postId, campId) = request
-        val user = userRepository.findById(userId.toLong()).orElseThrow {
-            throw IllegalArgumentException("user not found with id:$userId")
+    fun shareSuccess(request: Request) {
+        val(shareUserId, receiveUserId, postId) = request
+        val shareUser = userRepository.findById(shareUserId.toLong()).orElseThrow {
+            throw IllegalArgumentException("user not found with id:$shareUserId")
+        }
+        val receiveUser = userRepository.findById(receiveUserId.toLong()).orElseThrow{
+            throw IllegalArgumentException("user not found with id:$receiveUserId")
         }
         val post = postRepository.findById(postId.toLong()).orElseThrow {
             throw IllegalArgumentException("post not found with id:$postId")
         }
-        return shareRepository.save(
-            ShareRecord(
-                user = user,
-                type = type,
-                post = post,
-                campId = campId,
-                pointToGet = 100,
-            )
-        ).let { toDto(it) }
+        saveShareRecordForTwoUsers(shareUser,receiveUser,post)
+        updatePostToBeDone(post)
+    }
 
+    private fun saveShareRecordForTwoUsers(shareUser: User, receiveUser: User, post: Post) {
+        val pointToGet = 100
+        shareRepository.save(
+            ShareRecord(
+                user = shareUser,
+                type = ShareType.SHARE,
+                post = post,
+                campId = post.campId.toLong(),
+                pointToGet = pointToGet,
+            )
+        )
+        shareRepository.save(
+            ShareRecord(
+                user = receiveUser,
+                type = ShareType.RECEIVE,
+                post = post,
+                campId = post.campId.toLong(),
+                pointToGet = pointToGet,
+            )
+        )
+        shareUser.updatePoint(pointToGet)
+        receiveUser.updatePoint(pointToGet)
+    }
+    private fun updatePostToBeDone(post: Post) {
+        post.status = PostStatus.DONE
+        postRepository.save(post)
     }
 
     private fun toDto(entity: ShareRecord): ShareRecordDto =with(entity){

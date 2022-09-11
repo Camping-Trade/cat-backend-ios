@@ -20,4 +20,7 @@ class Post(
     val product: String,
     @Enumerated(EnumType.STRING)
     val type: PostType = PostType.SHARE,
-) : DateTime()
+) : DateTime() {
+
+    var status: PostStatus = PostStatus.ACTIVE
+}
