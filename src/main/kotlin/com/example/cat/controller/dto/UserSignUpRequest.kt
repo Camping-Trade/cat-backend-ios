@@ -7,4 +7,6 @@ data class UserSignUpRequest(
     val email: String,
     val nickname: String,
     val profileImageUrl: String,
+    val kakaoId: String? = null,
+    val thumbnailImageUrl: String? = null,
 )

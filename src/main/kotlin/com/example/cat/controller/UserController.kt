@@ -51,6 +51,7 @@ class UserController(
             nickname = request.nickname,
             profileImageUrl = request.profileImageUrl,
             email = request.email,
+            thumbnailImageUrl = request.thumbnailImageUrl,
         )
     }
     internal fun toUserInfoResponse(entity: User): UserInfoResponse{
@@ -59,6 +60,8 @@ class UserController(
             nickname = entity.nickname,
             profileImageUrl = entity.profileImageUrl,
             email = entity.email,
+            kakaoId = entity.kakaoId,
+            thumbnailImageUrl = entity.thumbnailImageUrl,
         )
     }
     internal fun toUser(request: UserSignUpRequest): User{
@@ -66,6 +69,8 @@ class UserController(
             nickname = request.nickname,
             profileImageUrl = request.profileImageUrl,
             email = request.email,
+            kakaoId = request.kakaoId,
+            thumbnailImageUrl = request.thumbnailImageUrl,
         )
     }
 }

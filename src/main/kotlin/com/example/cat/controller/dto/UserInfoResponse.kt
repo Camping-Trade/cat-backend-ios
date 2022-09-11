@@ -5,4 +5,6 @@ data class UserInfoResponse(
     val nickname: String,
     val profileImageUrl: String,
     val email: String,
+    val kakaoId: String?,
+    val thumbnailImageUrl: String?,
 )
