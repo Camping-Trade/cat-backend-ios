@@ -31,7 +31,7 @@ class PostController(
     @GetMapping
     fun viewPostsByCampId(@RequestParam("campId") campId: String): Response<ViewPostsResponse> {
         val posts = postService.viewPosts(campId)
-        return Response<ViewPostsResponse>(
+        return Response(
             SuccessCode.POSTS_SUCCESSFULLY_RETURNED,
             ViewPostsResponse(
                 posts = posts,
