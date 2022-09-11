@@ -1,4 +1,4 @@
-package com.example.cat.domain.post
+package com.example.cat.domain.sharing
 
 import com.example.cat.domain.User
 import javax.persistence.*
@@ -17,6 +17,7 @@ class Post(
     val imageUrl: String? = null,
     val location : String? = null,
     val campId: String,
+    val product: String,
     @Enumerated(EnumType.STRING)
     val type: PostType = PostType.SHARE,
 ) : DateTime()

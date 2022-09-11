@@ -1,4 +1,4 @@
-package com.example.cat.domain.post
+package com.example.cat.domain.sharing
 
 enum class PostType {
     SALE,

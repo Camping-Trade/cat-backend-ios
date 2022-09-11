@@ -27,7 +27,7 @@ class PostController(
         return postService.writePost(request)
     }
 
-    @Operation(summary = "게시글 조회 api", description = "게시글을 조회하는 api입니다")
+    @Operation(summary = "게시글 조회 api", description = "캠핑장 아이디를 기반으로 해당 캠핑장에서 작성된 게시글을 조회하는 api입니다")
     @GetMapping
     fun viewPostsByCampId(@RequestParam("campId") campId: String): Response<ViewPostsResponse> {
         val posts = postService.viewPosts(campId)

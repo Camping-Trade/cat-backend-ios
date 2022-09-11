@@ -1,4 +1,4 @@
-package com.example.cat.domain.post
+package com.example.cat.domain.sharing
 
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate

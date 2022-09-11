@@ -3,7 +3,7 @@ package com.example.cat.service
 import com.example.cat.controller.dto.PostDto
 import com.example.cat.controller.dto.UserDto
 import com.example.cat.controller.dto.WritePostRequest
-import com.example.cat.domain.post.Post
+import com.example.cat.domain.sharing.Post
 import com.example.cat.exception.UserNotFoundException
 import com.example.cat.repository.PostRepository
 import com.example.cat.repository.UserRepository
@@ -15,7 +15,7 @@ class PostService(
     private val userRepository: UserRepository,
 ) {
     fun writePost(request: WritePostRequest): PostDto {
-        val (title, content, imageUrl, location, campId, id, type) = request
+        val (title, content, imageUrl, location, campId, id, type, product ) = request
         val writer = userRepository.findById(id.toLong())
             .orElseThrow { throw UserNotFoundException.byUserId(id) }
         val postToSave = Post(
@@ -26,6 +26,7 @@ class PostService(
             campId = campId,
             writer = writer,
             type = type,
+            product = product,
         )
         val savedPost = postRepository.save(postToSave)
         return fromEntity(savedPost)
@@ -45,7 +46,8 @@ class PostService(
             imageUrl = entity.imageUrl,
             location = entity.location,
             campId = entity.campId,
-            type = entity.type
+            type = entity.type,
+            product = entity.product,
             )
     }
 }
